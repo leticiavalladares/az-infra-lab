@@ -1,0 +1,38 @@
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.4.0
+    hooks:
+      - id: trailing-whitespace
+      - id: end-of-file-fixer
+      - id: check-docstring-first
+      - id: check-json
+      - id: check-added-large-files
+      - id: check-yaml
+      - id: debug-statements
+      - id: name-tests-test
+      - id: double-quote-string-fixer
+      - id: requirements-txt-fixer
+  - repo: https://github.com/antonbabenko/pre-commit-terraform
+    rev: v1.83.4
+    hooks:
+      - id: terraform_docs
+        args:
+          - --hook-config=--path-to-file=README.md        # Valid UNIX path. I.e. ../TFDOC.md or docs/README.md etc.
+          - --hook-config=--add-to-existing-file=true     # Boolean. true or false
+          - --hook-config=--create-file-if-not-exist=true # Boolean. true or false
+      - id: terraform_fmt
+      - id: terraform_tflint
+        args:
+          - --args=--only=terraform_deprecated_interpolation
+          - --args=--only=terraform_deprecated_index
+          - --args=--only=terraform_unused_declarations
+          - --args=--only=terraform_comment_syntax
+          - --args=--only=terraform_documented_outputs
+          - --args=--only=terraform_documented_variables
+          - --args=--only=terraform_typed_variables
+          - --args=--only=terraform_module_pinned_source
+          - --args=--only=terraform_naming_convention
+          - --args=--only=terraform_workspace_remote
+      - id: terraform_checkov
+        args:
+          - --args=--skip-check CKV_AZURE_1,CKV_AZURE_178,CKV_AZURE_149,CKV_AZURE_160,CKV_AZURE_9,CKV_AZURE_10
