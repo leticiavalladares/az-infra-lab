@@ -12,7 +12,7 @@
 
 | Name | Version |
 |------|---------|
-| <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | ~>3.96.0 |
+| <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | 3.96.0 |
 
 ## Modules
 
@@ -36,6 +36,8 @@ No modules.
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | <a name="input_admin_password"></a> [admin\_password](#input\_admin\_password) | The password associated with the local administrator account. | `string` | n/a | yes |
+| <a name="input_my_ip"></a> [my\_ip](#input\_my\_ip) | Local IP address | `string` | n/a | yes |
+| <a name="input_trainee_name"></a> [trainee\_name](#input\_trainee\_name) | First name and lastname of trainee to be used as prefix for each resource, without spaces and in lowercase | `string` | n/a | yes |
 
 ## Outputs
 

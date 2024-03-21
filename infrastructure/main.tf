@@ -1,12 +1,12 @@
 resource "azurerm_resource_group" "rg" {
   location = local.location
-  name     = "rg-${local.name_suffix}"
+  name     = "${local.trainee_name_validated}-${local.name_suffix}-rg"
 
   tags = local.default_tags
 }
 
 resource "azurerm_virtual_network" "vnet" {
-  name                = "vnet-${local.name_suffix}"
+  name                = "${local.trainee_name_validated}-${local.name_suffix}-vnet"
   location            = local.location
   resource_group_name = azurerm_resource_group.rg.name
   address_space       = ["10.0.0.0/16"]
@@ -15,26 +15,37 @@ resource "azurerm_virtual_network" "vnet" {
 }
 
 resource "azurerm_subnet" "snet" {
-  name                 = "snet-${local.name_suffix}"
+  name                 = "${local.trainee_name_validated}-${local.name_suffix}-snet"
   resource_group_name  = azurerm_resource_group.rg.name
   virtual_network_name = azurerm_virtual_network.vnet.name
   address_prefixes     = ["10.0.1.0/24"]
 }
 
 resource "azurerm_network_security_group" "nsg" {
-  name                = "${local.name_suffix}-nsg"
+  name                = "${local.trainee_name_validated}-${local.name_suffix}-nsg"
   location            = azurerm_resource_group.rg.location
   resource_group_name = azurerm_resource_group.rg.name
 
   security_rule {
-    name                       = "AllowAllInbound"
+    name                       = "AllowSSHInbound"
     priority                   = 1000
     direction                  = "Inbound"
     access                     = "Allow"
-    protocol                   = "*"
+    protocol                   = "Tcp"
     source_port_range          = "*"
-    destination_port_range     = "*"
-    source_address_prefix      = "*"
+    destination_port_range     = 22
+    source_address_prefix      = var.my_ip
+    destination_address_prefix = "*"
+  }
+  security_rule {
+    name                       = "AllowRDPInbound"
+    priority                   = 1001
+    direction                  = "Inbound"
+    access                     = "Allow"
+    protocol                   = "Tcp"
+    source_port_range          = "*"
+    destination_port_range     = 3389
+    source_address_prefix      = var.my_ip
     destination_address_prefix = "*"
   }
   security_rule {
@@ -58,7 +69,7 @@ resource "azurerm_subnet_network_security_group_association" "nsg_snet_assoc" {
 }
 
 resource "azurerm_public_ip" "pip" {
-  name                = "pip-vm-${local.name_suffix}"
+  name                = "${local.trainee_name_validated}-${local.name_suffix}-pip"
   location            = local.location
   resource_group_name = azurerm_resource_group.rg.name
   allocation_method   = "Static"
@@ -67,7 +78,7 @@ resource "azurerm_public_ip" "pip" {
 }
 
 resource "azurerm_network_interface" "nic" {
-  name                = "nic-${local.name_suffix}"
+  name                = "${local.trainee_name_validated}-${local.name_suffix}-nic"
   location            = local.location
   resource_group_name = azurerm_resource_group.rg.name
 
@@ -86,7 +97,7 @@ resource "azurerm_network_interface" "nic" {
 }
 
 resource "azurerm_linux_virtual_machine" "vm" {
-  name                = "vm-${local.name_suffix}"
+  name                = "${local.trainee_name_validated}-${local.name_suffix}-vm"
   location            = local.location
   resource_group_name = azurerm_resource_group.rg.name
   size                = "Standard_B2s"
@@ -98,7 +109,7 @@ resource "azurerm_linux_virtual_machine" "vm" {
   os_disk {
     caching              = "ReadWrite"
     storage_account_type = "Standard_LRS"
-    name                 = "os-vm-${local.name_suffix}"
+    name                 = "${local.trainee_name_validated}-${local.name_suffix}-vm-os"
   }
 
   source_image_reference {
