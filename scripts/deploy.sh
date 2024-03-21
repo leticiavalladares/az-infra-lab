@@ -1,6 +1,6 @@
 #!/bin/bash
 
-cd ~
+cd ~/az-infra-lab/infrastructure/
 tf_init=$(terraform init)
 echo $tf_init
 tf_plan=$(terraform plan)
