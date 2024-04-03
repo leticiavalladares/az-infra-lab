@@ -1,6 +1,6 @@
 resource "azurerm_resource_group" "rg" {
   location = local.location
-  name     = "${local.trainee_name_validated}-${local.name_suffix}-rg"
+  name     = "${local.trainee_name_validated}-${local.name_suffix}-aks-rg"
 
   tags = local.default_tags
 }
