@@ -14,8 +14,8 @@ locals {
   trainee_name_validated = lower(local.trainee_name_without_underscore)
 
   clusters = {
-    aks-cluster-1 = {
-      dns_prefix         = "${local.trainee_name_validated}-${local.name_suffix}-01"
+    "${local.trainee_name_validated}-${local.name_suffix}-01" = {
+      dns_prefix         = "${local.trainee_name_validated}-${local.name_suffix}-01-aks"
       def_node_pool_name = "dfnodepool"
       node_count         = 3
       node_labels        = { app = "nginx" }
