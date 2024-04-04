@@ -22,6 +22,7 @@ locals {
       node_labels        = { app = "nginx" }
       vm_size            = "Standard_B4s_v2"
       identity_type      = "SystemAssigned"
+      subnet_id          = data.azurerm_subnet.node_snet.id
     }
   }
 }

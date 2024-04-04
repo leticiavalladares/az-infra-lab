@@ -25,12 +25,14 @@ No modules.
 | [azurerm_container_registry.acr](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/container_registry) | resource |
 | [azurerm_kubernetes_cluster.cluster](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/kubernetes_cluster) | resource |
 | [azurerm_resource_group.rg](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/resource_group) | resource |
+| [azurerm_subnet.node_snet](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/data-sources/subnet) | data source |
 
 ## Inputs
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | <a name="input_trainee_name"></a> [trainee\_name](#input\_trainee\_name) | First name and lastname of trainee to be used as prefix for each resource, without spaces and in lowercase | `string` | n/a | yes |
+| <a name="input_trainee_number"></a> [trainee\_number](#input\_trainee\_number) | Trainee asssigned number | `number` | n/a | yes |
 
 ## Outputs
 

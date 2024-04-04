@@ -23,16 +23,25 @@ locals {
       address_prefixes = [cidrsubnet(local.vnet_cidr, 8, (var.trainee_number + 159))]
     }
     3 = {
-      address_prefixes = [cidrsubnet(local.vnet_cidr, 4, ((1 + var.trainee_number) - 1))]
+      address_prefixes = [cidrsubnet(local.vnet_cidr, 8, (var.trainee_number + 169))]
     }
     4 = {
+      address_prefixes = [cidrsubnet(local.vnet_cidr, 4, ((1 + var.trainee_number) - 1))]
+    }
+    5 = {
       address_prefixes = [cidrsubnet(local.vnet_cidr, 8, ((1 + var.trainee_number) + 159))]
     }
-    19 = {
+    6 = {
+      address_prefixes = [cidrsubnet(local.vnet_cidr, 8, ((1 + var.trainee_number) + 169))]
+    }
+    28 = {
       address_prefixes = [cidrsubnet(local.vnet_cidr, 4, ((9 + var.trainee_number) - 1))]
     }
-    20 = {
+    29 = {
       address_prefixes = [cidrsubnet(local.vnet_cidr, 8, ((9 + var.trainee_number) + 159))]
+    }
+    30 = {
+      address_prefixes = [cidrsubnet(local.vnet_cidr, 8, ((9 + var.trainee_number) + 169))]
     }
   }
 

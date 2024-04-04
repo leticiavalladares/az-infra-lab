@@ -7,6 +7,15 @@ variable "trainee_name" {
   }
 }
 
+variable "trainee_number" {
+  description = "Trainee asssigned number"
+  type        = number
+  validation {
+    condition     = var.trainee_number > 0 && var.trainee_number < 11
+    error_message = "Trainee number must be a number between 1 and 10 (1 and 10 inclusive)"
+  }
+}
+
 # variable "my_ip" {
 #   description = "Local IP address"
 #   type        = string
