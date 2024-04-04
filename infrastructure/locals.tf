@@ -17,16 +17,16 @@ locals {
 
   subnets = {
     1 = {
-      address_prefixes = [cidrsubnet(local.vnet_cidr, 4, (trainee_number - 1))]
+      address_prefixes = [cidrsubnet(local.vnet_cidr, 4, (var.trainee_number - 1))]
     }
     2 = {
-      address_prefixes = [cidrsubnet(local.vnet_cidr, 8, (trainee_number - 1))]
+      address_prefixes = [cidrsubnet(local.vnet_cidr, 8, (var.trainee_number - 1))]
     }
     3 = {
-      address_prefixes = [cidrsubnet(local.vnet_cidr, 4, (trainee_number - 1))]
+      address_prefixes = [cidrsubnet(local.vnet_cidr, 4, (var.trainee_number - 1))]
     }
     4 = {
-      address_prefixes = [cidrsubnet(local.vnet_cidr, 8, (trainee_number - 1))]
+      address_prefixes = [cidrsubnet(local.vnet_cidr, 8, (var.trainee_number - 1))]
     }
   }
 
