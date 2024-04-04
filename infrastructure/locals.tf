@@ -7,10 +7,27 @@ locals {
   location    = "Germany West Central"
   username    = "eonadmin"
   name_suffix = "eon-gwc"
+  vnet_cidr   = "10.0.0.0/16"
 
   trainee_name_without_spaces     = replace(var.trainee_name, " ", "")
   trainee_name_without_dashes     = replace(local.trainee_name_without_spaces, "-", "")
   trainee_name_without_underscore = replace(local.trainee_name_without_dashes, "_", "")
 
   trainee_name_validated = lower(local.trainee_name_without_underscore)
+
+  subnets = {
+    1 = {
+      address_prefixes = [cidrsubnet(local.vnet_cidr, 4, 0)]
+    }
+    2 = {
+      address_prefixes = [cidrsubnet(local.vnet_cidr, 8, 0)]
+    }
+    3 = {
+      address_prefixes = [cidrsubnet(local.vnet_cidr, 4, 1)]
+    }
+    4 = {
+      address_prefixes = [cidrsubnet(local.vnet_cidr, 8, 1)]
+    }
+  }
+
 }
