@@ -6,7 +6,7 @@ locals {
 
   location    = "Germany West Central"
   username    = "eonadmin"
-  name_suffix = "eon-lab-gwc"
+  name_suffix = "eon-gwc"
 
   trainee_name_without_spaces     = replace(var.trainee_name, " ", "")
   trainee_name_without_dashes     = replace(local.trainee_name_without_spaces, "-", "")
