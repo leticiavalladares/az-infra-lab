@@ -10,12 +10,14 @@ resource "azurerm_container_registry" "acr" {
   resource_group_name = azurerm_resource_group.rg.name
   location            = azurerm_resource_group.rg.location
   sku                 = "Basic"
+
+  tags = local.default_tags
 }
 
 resource "azurerm_kubernetes_cluster" "cluster" {
   for_each = local.clusters
 
-  name                = "${each.key}aks"
+  name                = "${each.key}-aks"
   location            = azurerm_resource_group.rg.location
   resource_group_name = azurerm_resource_group.rg.name
   dns_prefix          = each.value.dns_prefix
@@ -26,10 +28,9 @@ resource "azurerm_kubernetes_cluster" "cluster" {
     node_labels    = each.value.node_labels
     vm_size        = each.value.vm_size
     vnet_subnet_id = each.value.subnet_id
-    # orchestrator_version = "v1"
   }
 
-  node_resource_group = "mc-${local.trainee_name_validated}-${local.name_suffix}-aks-rg"
+  node_resource_group = "${local.trainee_name_validated}-${local.name_suffix}-mc-aks-rg"
 
   network_profile {
     network_plugin = "azure"
@@ -41,5 +42,5 @@ resource "azurerm_kubernetes_cluster" "cluster" {
     type = each.value.identity_type
   }
 
-  tags = merge(local.default_tags, { Name = each.key })
+  tags = local.default_tags
 }

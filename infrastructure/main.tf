@@ -6,10 +6,18 @@ resource "azurerm_resource_group" "rg" {
 }
 
 # Only for test purposes, lab vnet should be created in another repo
+resource "azurerm_resource_group" "vnet_rg" {
+  location = local.location
+  name     = "${local.name_suffix}-vnet-rg"
+
+  tags = local.default_tags
+}
+
+
 resource "azurerm_virtual_network" "vnet" {
-  name                = "${local.trainee_name_validated}-${local.name_suffix}-vnet"
+  name                = "${local.name_suffix}-vnet"
   location            = local.location
-  resource_group_name = azurerm_resource_group.rg.name
+  resource_group_name = azurerm_resource_group.vnet_rg.name
   address_space       = [local.vnet_cidr]
 
   tags = local.default_tags
