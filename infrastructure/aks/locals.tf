@@ -12,7 +12,7 @@ locals {
   trainee_name_without_underscore = replace(local.trainee_name_without_dashes, "_", "")
 
   trainee_name_validated = lower(local.trainee_name_without_underscore)
-  name_suffix_for_acr    = join(local.trainee_name_validated, replace(local.name_suffix, "-", ""))
+  name_suffix_for_acr    = join("", [local.trainee_name_validated, replace(local.name_suffix, "-", "")])
 
   clusters = {
     "${local.trainee_name_validated}${local.name_suffix_for_acr}1" = {

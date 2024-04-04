@@ -67,7 +67,9 @@ resource "azurerm_network_security_group" "nsg" {
 }
 
 resource "azurerm_subnet_network_security_group_association" "nsg_snet_assoc" {
-  subnet_id                 = azurerm_subnet.snet.id
+  for_each = local.subnets
+
+  subnet_id                 = azurerm_subnet.snet[each.key].id
   network_security_group_id = azurerm_network_security_group.nsg.id
 }
 
