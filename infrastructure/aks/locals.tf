@@ -17,7 +17,7 @@ locals {
   clusters = {
     "${local.trainee_name_validated}-${local.name_suffix}-1" = {
       dns_prefix         = "${local.trainee_name_validated}-${local.name_suffix}-1-aks"
-      def_node_pool_name = "ubuntunodepool"
+      def_node_pool_name = "linnodepool"
       node_count         = 2
       node_labels        = { app = "nginx" }
       vm_size            = "Standard_B4s_v2"
