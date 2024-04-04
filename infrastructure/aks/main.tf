@@ -20,8 +20,6 @@ resource "azurerm_kubernetes_cluster" "cluster" {
   resource_group_name = azurerm_resource_group.rg.name
   dns_prefix          = each.value.dns_prefix
 
-  automatic_channel_upgrade = "none"
-
   default_node_pool {
     name        = each.value.def_node_pool_name
     node_count  = each.value.node_count

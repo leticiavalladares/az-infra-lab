@@ -91,7 +91,7 @@ resource "azurerm_network_interface" "nic" {
     name                          = "ip-config"
     private_ip_address_allocation = "Dynamic"
     public_ip_address_id          = azurerm_public_ip.pip.id
-    subnet_id                     = azurerm_subnet.snet.id
+    subnet_id                     = azurerm_subnet.snet["1"].id
   }
 
   lifecycle {
