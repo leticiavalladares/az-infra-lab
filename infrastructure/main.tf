@@ -13,7 +13,7 @@ resource "azurerm_resource_group" "vnet_rg" {
   tags = local.default_tags
 }
 
-
+# Only for test purposes, lab vnet should be created in another repo
 resource "azurerm_virtual_network" "vnet" {
   name                = "${local.name_suffix}-vnet"
   location            = local.location
@@ -27,7 +27,7 @@ resource "azurerm_subnet" "snet" {
   for_each = local.subnets
 
   name                 = "${local.trainee_name_validated}-${local.name_suffix}-${each.key}-snet"
-  resource_group_name  = azurerm_resource_group.rg.name
+  resource_group_name  = azurerm_resource_group.vnet_rg.name
   virtual_network_name = azurerm_virtual_network.vnet.name
   address_prefixes     = each.value.address_prefixes
 }
