@@ -5,7 +5,7 @@ locals {
   }
 
   location    = "Germany West Central"
-  name_suffix = "lab-gwc"
+  name_suffix = "eon-lab-gwc"
 
   trainee_name_without_spaces     = replace(var.trainee_name, " ", "")
   trainee_name_without_dashes     = replace(local.trainee_name_without_spaces, "-", "")

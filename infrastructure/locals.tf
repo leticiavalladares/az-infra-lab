@@ -6,7 +6,7 @@ locals {
 
   location    = "Germany West Central"
   username    = "eonadmin"
-  name_suffix = "eon-gwc"
+  name_suffix = "eon-lab-gwc"
   vnet_cidr   = "10.0.0.0/16"
 
   trainee_name_without_spaces     = replace(var.trainee_name, " ", "")
