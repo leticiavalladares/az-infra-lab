@@ -5,7 +5,7 @@ data "azurerm_subnet" "node_snet" {
 }
 
 data "azurerm_private_dns_zone" "private_dns_zone" {
-  name                = "privatelink.germanycentralwest.azmk8s.io"
+  name                = "privatelink.germanywestcentral.azmk8s.io"
   resource_group_name = "${local.name_suffix}-vnet-rg"
 }
 
