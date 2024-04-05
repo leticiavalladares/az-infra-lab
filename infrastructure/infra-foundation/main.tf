@@ -60,7 +60,7 @@ resource "azurerm_bastion_host" "bastion_host" {
   name                = "${local.name_suffix}-bas"
   location            = azurerm_resource_group.vnet_rg.location
   resource_group_name = azurerm_resource_group.vnet_rg.name
-  sku                 = "Basic"
+  sku                 = "Standard"
 
   ip_configuration {
     name                 = "configuration"
