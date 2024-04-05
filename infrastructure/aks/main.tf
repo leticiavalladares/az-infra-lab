@@ -40,7 +40,7 @@ resource "azurerm_kubernetes_cluster" "cluster" {
     network_plugin    = "azure"
     dns_service_ip    = "10.0.255.137"
     service_cidr      = "10.0.255.128/26"
-    load_balancer_sku = "Standard"
+    load_balancer_sku = "standard"
   }
 
   identity {
