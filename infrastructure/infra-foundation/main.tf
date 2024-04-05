@@ -61,6 +61,7 @@ resource "azurerm_bastion_host" "bastion_host" {
   location            = azurerm_resource_group.vnet_rg.location
   resource_group_name = azurerm_resource_group.vnet_rg.name
   sku                 = "Standard"
+  tunneling_enabled   = true
 
   ip_configuration {
     name                 = "configuration"
