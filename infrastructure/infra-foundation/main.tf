@@ -34,7 +34,7 @@ resource "azurerm_public_ip" "pip" {
 }
 
 resource "azurerm_private_dns_zone" "private_dns_zone" {
-  name                = "privatelink.germanycentralwest.azmk8s.io"
+  name                = "privatelink.germanywestcentral.azmk8s.io"
   resource_group_name = azurerm_resource_group.vnet_rg.name
 
   tags = local.default_tags
