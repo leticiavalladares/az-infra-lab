@@ -42,7 +42,5 @@ No modules.
 
 ## Outputs
 
-| Name | Description |
-|------|-------------|
-| <a name="output_public_ip"></a> [public\_ip](#output\_public\_ip) | Public IP assigned to VM |
+No outputs.
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
