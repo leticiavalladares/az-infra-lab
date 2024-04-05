@@ -17,10 +17,14 @@ resource "azurerm_container_registry" "acr" {
 resource "azurerm_kubernetes_cluster" "cluster" {
   for_each = local.clusters
 
-  name                = "${each.key}-aks"
-  location            = azurerm_resource_group.rg.location
-  resource_group_name = azurerm_resource_group.rg.name
-  dns_prefix          = each.value.dns_prefix
+  name                    = "${each.key}-aks"
+  location                = azurerm_resource_group.rg.location
+  resource_group_name     = azurerm_resource_group.rg.name
+  dns_prefix              = each.value.dns_prefix
+  private_cluster_enabled = true
+  private_dns_zone_id     = data.azurerm_private_dns_zone.private_dns_zone.id
+
+  private_cluster_public_fqdn_enabled = false
 
   default_node_pool {
     name           = each.value.def_node_pool_name
@@ -33,13 +37,15 @@ resource "azurerm_kubernetes_cluster" "cluster" {
   node_resource_group = "${local.trainee_name_validated}-${local.name_suffix}-mc-aks-rg"
 
   network_profile {
-    network_plugin = "azure"
-    dns_service_ip = "172.16.3.254"
-    service_cidr   = "172.16.0.0/22"
+    network_plugin    = "azure"
+    dns_service_ip    = "10.0.255.137"
+    service_cidr      = "10.0.255.128/26"
+    load_balancer_sku = "Standard"
   }
 
   identity {
-    type = each.value.identity_type
+    type         = "UserAssigned"
+    identity_ids = [data.azurerm_user_assigned_identity.user_id.id]
   }
 
   tags = local.default_tags

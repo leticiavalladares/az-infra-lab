@@ -7,7 +7,6 @@ locals {
   location    = "Germany West Central"
   username    = "eonadmin"
   name_suffix = "eon-lab-gwc"
-  vnet_cidr   = "10.0.0.0/16"
 
   trainee_name_without_spaces     = replace(var.trainee_name, " ", "")
   trainee_name_without_dashes     = replace(local.trainee_name_without_spaces, "-", "")
@@ -17,10 +16,10 @@ locals {
 
   subnets = {
     1 = {
-      address_prefixes = [cidrsubnet(local.vnet_cidr, 4, (var.trainee_number - 1))]
+      address_prefixes = [cidrsubnet(data.azurerm_virtual_network.vnet.address_space[0], 4, (var.trainee_number - 1))]
     }
     2 = {
-      address_prefixes = [cidrsubnet(local.vnet_cidr, 8, (var.trainee_number + 159))]
+      address_prefixes = [cidrsubnet(data.azurerm_virtual_network.vnet.address_space[0], 8, (var.trainee_number + 159))]
     }
   }
 
