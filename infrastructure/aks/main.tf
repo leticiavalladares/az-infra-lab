@@ -22,7 +22,6 @@ resource "azurerm_kubernetes_cluster" "cluster" {
   resource_group_name     = azurerm_resource_group.rg.name
   dns_prefix              = each.value.dns_prefix
   private_cluster_enabled = true
-  #private_dns_zone_id     = data.azurerm_private_dns_zone.private_dns_zone.id
 
   private_cluster_public_fqdn_enabled = true
 
@@ -32,6 +31,10 @@ resource "azurerm_kubernetes_cluster" "cluster" {
     node_labels    = each.value.node_labels
     vm_size        = each.value.vm_size
     vnet_subnet_id = each.value.subnet_id
+
+    upgrade_settings {
+      max_surge = "10%"
+    }
   }
 
   node_resource_group = "${local.trainee_name_validated}-${local.name_suffix}-mc-aks-rg"
@@ -42,10 +45,6 @@ resource "azurerm_kubernetes_cluster" "cluster" {
     service_cidr      = "10.1.0.0/26"
     load_balancer_sku = "standard"
   }
-
-  # api_server_access_profile {
-  #   subnet_id = each.value.subnet_id
-  # }
 
   identity {
     type         = "UserAssigned"
