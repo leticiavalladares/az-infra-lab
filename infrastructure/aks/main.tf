@@ -24,7 +24,7 @@ resource "azurerm_kubernetes_cluster" "cluster" {
   private_cluster_enabled = true
   private_dns_zone_id     = data.azurerm_private_dns_zone.private_dns_zone.id
 
-  private_cluster_public_fqdn_enabled = false
+  private_cluster_public_fqdn_enabled = true
 
   default_node_pool {
     name           = each.value.def_node_pool_name
@@ -38,8 +38,8 @@ resource "azurerm_kubernetes_cluster" "cluster" {
 
   network_profile {
     network_plugin    = "azure"
-    dns_service_ip    = "10.0.255.137"
-    service_cidr      = "10.0.255.128/26"
+    dns_service_ip    = "10.1.0.10"
+    service_cidr      = "10.1.0.10/26"
     load_balancer_sku = "standard"
   }
 
