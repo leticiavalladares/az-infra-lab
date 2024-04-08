@@ -24,7 +24,7 @@ resource "azurerm_route_table" "rt" {
     name                   = "${local.name_suffix}-aks-route-1"
     address_prefix         = "0.0.0.0/0"
     next_hop_type          = "VirtualAppliance"
-    next_hop_in_ip_address = data.azurerm_bastion_host.bas.ip_configuration[0].public_ip_address_id
+    next_hop_in_ip_address = data.azurerm_public_ip.bastion_pip.ip_address
   }
 
   tags = local.default_tags

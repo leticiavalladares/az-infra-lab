@@ -7,7 +7,7 @@ data "azurerm_virtual_network" "vnet" {
   resource_group_name = data.azurerm_resource_group.vnet_rg.name
 }
 
-data "azurerm_bastion_host" "bas" {
-  name                = "${local.name_suffix}-bas"
+data "azurerm_public_ip" "bastion_pip" {
+  name                = "${local.name_suffix}-pip"
   resource_group_name = data.azurerm_resource_group.vnet_rg.name
 }
