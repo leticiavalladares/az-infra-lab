@@ -14,6 +14,27 @@ resource "azurerm_subnet" "snet" {
   address_prefixes     = each.value.address_prefixes
 }
 
+resource "azurerm_route_table" "rt" {
+  name                          = "${local.name_suffix}-rt"
+  location                      = data.azurerm_resource_group.vnet_rg.location
+  resource_group_name           = data.azurerm_resource_group.vnet_rg.name
+  disable_bgp_route_propagation = false
+
+  route {
+    name                   = "${local.name_suffix}-aks-route-1"
+    address_prefix         = "0.0.0.0/0"
+    next_hop_type          = "VirtualAppliance"
+    next_hop_in_ip_address = data.azurerm_bastion_host.bas.ip_configuration[0].public_ip_address_id
+  }
+
+  tags = local.default_tags
+}
+
+resource "azurerm_subnet_route_table_association" "snet_rt_assoc" {
+  subnet_id      = azurerm_subnet.snet["1"].id
+  route_table_id = azurerm_route_table.rt.id
+}
+
 resource "azurerm_network_security_group" "nsg" {
   name                = "${local.trainee_name_validated}-${local.name_suffix}-nsg"
   location            = azurerm_resource_group.rg.location
