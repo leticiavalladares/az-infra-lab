@@ -63,4 +63,6 @@ resource "azurerm_kubernetes_cluster" "cluster" {
   }
 
   tags = local.default_tags
+
+  depends_on = [azurerm_subnet_route_table_association.snet_rt_assoc]
 }

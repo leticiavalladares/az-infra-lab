@@ -33,13 +33,6 @@ resource "azurerm_public_ip" "pip" {
   tags = local.default_tags
 }
 
-resource "azurerm_private_dns_zone" "private_dns_zone" {
-  name                = "privatelink.germanywestcentral.azmk8s.io"
-  resource_group_name = azurerm_resource_group.vnet_rg.name
-
-  tags = local.default_tags
-}
-
 resource "azurerm_user_assigned_identity" "user_id" {
   name                = "${local.name_suffix}-id"
   resource_group_name = azurerm_resource_group.vnet_rg.name
