@@ -55,6 +55,11 @@ resource "azurerm_kubernetes_cluster" "cluster" {
     service_cidr      = "10.1.0.0/26"
     load_balancer_sku = "standard"
     outbound_type     = "userDefinedRouting"
+
+    load_balancer_profile {
+      idle_timeout_in_minutes = 0
+      outbound_ip_address_ids = null
+    }
   }
 
   identity {
@@ -62,7 +67,11 @@ resource "azurerm_kubernetes_cluster" "cluster" {
     identity_ids = [data.azurerm_user_assigned_identity.user_id.id]
   }
 
-  tags = local.default_tags
-
   depends_on = [azurerm_subnet_route_table_association.snet_rt_assoc]
+
+  lifecycle {
+    ignore_changes = [network_profile[0].load_balancer_profile[0].idle_timeout_in_minutes]
+  }
+
+  tags = local.default_tags
 }
