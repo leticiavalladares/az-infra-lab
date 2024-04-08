@@ -43,6 +43,11 @@ resource "azurerm_kubernetes_cluster" "cluster" {
     load_balancer_sku = "standard"
   }
 
+  api_server_access_profile {
+    subnet_id                = each.value.subnet_id
+    vnet_integration_enabled = true
+  }
+
   identity {
     type         = "UserAssigned"
     identity_ids = [data.azurerm_user_assigned_identity.user_id.id]
