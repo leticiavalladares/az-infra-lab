@@ -43,9 +43,9 @@ resource "azurerm_kubernetes_cluster" "cluster" {
     load_balancer_sku = "standard"
   }
 
-  api_server_access_profile {
-    subnet_id = each.value.subnet_id
-  }
+  # api_server_access_profile {
+  #   subnet_id = each.value.subnet_id
+  # }
 
   identity {
     type         = "UserAssigned"
