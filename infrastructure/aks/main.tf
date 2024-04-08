@@ -22,7 +22,7 @@ resource "azurerm_kubernetes_cluster" "cluster" {
   resource_group_name     = azurerm_resource_group.rg.name
   dns_prefix              = each.value.dns_prefix
   private_cluster_enabled = true
-  private_dns_zone_id     = data.azurerm_private_dns_zone.private_dns_zone.id
+  #private_dns_zone_id     = data.azurerm_private_dns_zone.private_dns_zone.id
 
   private_cluster_public_fqdn_enabled = true
 
