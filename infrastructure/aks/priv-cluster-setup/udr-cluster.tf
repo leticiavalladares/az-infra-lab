@@ -29,10 +29,6 @@ resource "azurerm_kubernetes_cluster" "cluster" {
     service_cidr      = "10.1.0.0/26"
     load_balancer_sku = "standard"
     outbound_type     = "userDefinedRouting"
-
-    load_balancer_profile {
-      idle_timeout_in_minutes = 0
-    }
   }
 
   identity {
