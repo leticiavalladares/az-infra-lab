@@ -44,8 +44,7 @@ resource "azurerm_kubernetes_cluster" "cluster" {
   }
 
   api_server_access_profile {
-    subnet_id                = each.value.subnet_id
-    vnet_integration_enabled = true
+    subnet_id = each.value.subnet_id
   }
 
   identity {
