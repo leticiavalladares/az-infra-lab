@@ -40,8 +40,6 @@ resource "azurerm_kubernetes_cluster" "cluster" {
     identity_ids = [data.azurerm_user_assigned_identity.user_id.id]
   }
 
-  depends_on = [azurerm_subnet_route_table_association.snet_rt_assoc]
-
   lifecycle {
     ignore_changes = [network_profile[0].load_balancer_profile[0].idle_timeout_in_minutes]
   }
