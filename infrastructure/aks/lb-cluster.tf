@@ -40,9 +40,9 @@ resource "azurerm_kubernetes_cluster" "cluster" {
 }
 
 resource "azurerm_role_assignment" "user_id_role_assign" {
-  for_each = toset(local.roles_uid_on_private_zone)
+  for_each = local.clusters
 
   scope                = azurerm_kubernetes_cluster.cluster.private_dns_zone_id
-  role_definition_name = each.key
+  role_definition_name = [for role in each.value.roles_uid_on_private_zone : role]
   principal_id         = data.azurerm_user_assigned_identity.user_id.principal_id
 }
