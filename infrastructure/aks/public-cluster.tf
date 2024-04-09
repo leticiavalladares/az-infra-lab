@@ -5,9 +5,7 @@ resource "azurerm_kubernetes_cluster" "cluster" {
   location                = azurerm_resource_group.rg.location
   resource_group_name     = azurerm_resource_group.rg.name
   dns_prefix              = each.value.dns_prefix
-  private_cluster_enabled = true
-
-  private_cluster_public_fqdn_enabled = true
+  private_cluster_enabled = false
 
   default_node_pool {
     name           = each.value.def_node_pool_name
