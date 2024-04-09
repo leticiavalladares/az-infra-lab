@@ -13,9 +13,4 @@ locals {
       address_prefixes = [cidrsubnet(local.vnet_cidr, 10, 1023)]
     }
   }
-
-  roles_uid_on_private_zone = [
-    "Private DNS Zone Contributor",
-    "Network Contributor"
-  ]
 }

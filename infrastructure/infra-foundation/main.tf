@@ -41,14 +41,6 @@ resource "azurerm_user_assigned_identity" "user_id" {
   tags = local.default_tags
 }
 
-resource "azurerm_role_assignment" "user_id_role_assign" {
-  for_each = toset(local.roles_uid_on_private_zone)
-
-  scope                = azurerm_private_dns_zone.private_dns_zone.id
-  role_definition_name = each.key
-  principal_id         = azurerm_user_assigned_identity.user_id.principal_id
-}
-
 resource "azurerm_bastion_host" "bastion_host" {
   name                = "${local.name_suffix}-bas"
   location            = azurerm_resource_group.vnet_rg.location
