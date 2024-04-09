@@ -23,11 +23,11 @@ locals {
       vm_size            = "Standard_B4s_v2"
       identity_type      = "SystemAssigned"
       subnet_id          = data.azurerm_subnet.node_snet.id
-
-      roles_uid_on_private_zone = [
-        "Private DNS Zone Contributor",
-        "Network Contributor"
-      ]
     }
   }
+
+  roles_uid_on_private_zone = [
+    "Private DNS Zone Contributor",
+    "Network Contributor"
+  ]
 }
