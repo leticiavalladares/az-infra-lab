@@ -43,10 +43,17 @@ resource "azurerm_kubernetes_cluster" "cluster" {
   tags = local.default_tags
 }
 
+######
+
+variable "private_dns_zone_id" {
+  type        = string
+  description = "Private DNS Zone created by AKS Cluster 1"
+}
+
 resource "azurerm_role_assignment" "user_id_role_assign" {
   for_each = toset(local.roles_uid_on_private_zone)
 
-  scope                = azurerm_kubernetes_cluster.cluster["${local.trainee_name_validated}-${local.name_suffix}-1"].private_dns_zone_id
+  scope                = var.private_dns_zone_id
   role_definition_name = each.key
   principal_id         = data.azurerm_user_assigned_identity.user_id.principal_id
 }

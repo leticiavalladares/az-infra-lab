@@ -10,6 +10,7 @@ terraform apply -auto-approve
 az aks update -g $TF_VAR_trainee_name-eon-lab-gwc-aks-rg -n $TF_VAR_trainee_name-eon-lab-gwc-1-aks --outbound-type userDefinedRouting
 mv ./priv-cluster-setup/udr-cluster.tf .
 mv ./lb-cluster.tf ./priv-cluster-setup/
+export TF_VAR_private_dns_zone_id=$(az network private-dns zone list -g $TF_VAR_trainee_name-eon-lab-gwc-mc-aks-rg --query "[].id" --output tsv)
 terraform apply -auto-approve
 cd ./acr-images/linux/
 ACR_RGNAME=$TF_VAR_trainee_name-eon-lab-gwc-aks-rg
