@@ -36,3 +36,12 @@ resource "azurerm_kubernetes_cluster" "cluster" {
 
   tags = local.default_tags
 }
+
+resource "azurerm_role_assignment" "acr_role_assignment" {
+  for_each = local.clusters
+
+  principal_id                     = azurerm_kubernetes_cluster[each.key].cluster.kubelet_identity[0].object_id
+  role_definition_name             = "AcrPull"
+  scope                            = azurerm_container_registry.acr.id
+  skip_service_principal_aad_check = true
+}
