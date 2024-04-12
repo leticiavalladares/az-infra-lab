@@ -30,8 +30,7 @@ resource "azurerm_kubernetes_cluster" "cluster" {
   }
 
   identity {
-    type         = "UserAssigned"
-    identity_ids = [data.azurerm_user_assigned_identity.user_id.id]
+    type = "SystemAssigned"
   }
 
   tags = local.default_tags

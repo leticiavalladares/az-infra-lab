@@ -25,9 +25,4 @@ locals {
       subnet_id          = data.azurerm_subnet.node_snet.id
     }
   }
-
-  roles_uid_on_private_zone = [
-    "Private DNS Zone Contributor",
-    "Network Contributor"
-  ]
 }

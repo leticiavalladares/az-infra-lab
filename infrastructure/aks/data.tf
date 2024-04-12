@@ -7,8 +7,3 @@ data "azurerm_subnet" "node_snet" {
   resource_group_name  = data.azurerm_resource_group.vnet_rg.name
   virtual_network_name = "${local.name_suffix}-vnet"
 }
-
-data "azurerm_user_assigned_identity" "user_id" {
-  name                = "${local.name_suffix}-id"
-  resource_group_name = data.azurerm_resource_group.vnet_rg.name
-}

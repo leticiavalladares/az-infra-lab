@@ -33,14 +33,6 @@ resource "azurerm_public_ip" "pip" {
   tags = local.default_tags
 }
 
-resource "azurerm_user_assigned_identity" "user_id" {
-  name                = "${local.name_suffix}-id"
-  resource_group_name = azurerm_resource_group.vnet_rg.name
-  location            = azurerm_resource_group.vnet_rg.location
-
-  tags = local.default_tags
-}
-
 resource "azurerm_bastion_host" "bastion_host" {
   name                = "${local.name_suffix}-bas"
   location            = azurerm_resource_group.vnet_rg.location
