@@ -44,3 +44,12 @@ resource "azurerm_role_assignment" "acr_role_assignment" {
   scope                            = azurerm_container_registry.acr.id
   skip_service_principal_aad_check = true
 }
+
+resource "azurerm_role_assignment" "net_contributor_role_assignment" {
+  for_each = local.clusters
+
+  principal_id                     = azurerm_kubernetes_cluster.cluster[each.key].identity[0].principal_id
+  role_definition_name             = "Network Contributor"
+  scope                            = data.azurerm_subnet.node_snet.id
+  skip_service_principal_aad_check = true
+}
