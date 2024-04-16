@@ -27,6 +27,7 @@ resource "azurerm_kubernetes_cluster" "cluster" {
     service_cidr      = "10.1.0.0/26"
     load_balancer_sku = "standard"
     outbound_type     = "loadBalancer"
+    network_policy    = "azure"
   }
 
   identity {
