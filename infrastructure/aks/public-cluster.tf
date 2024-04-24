@@ -54,3 +54,21 @@ resource "azurerm_role_assignment" "net_contributor_role_assignment" {
   scope                            = data.azurerm_subnet.node_snet.id
   skip_service_principal_aad_check = true
 }
+
+resource "azurerm_role_assignment" "contributor_role_assignment" {
+  for_each = local.clusters
+
+  principal_id                     = azurerm_kubernetes_cluster.cluster[each.key].identity[0].principal_id
+  role_definition_name             = "Contributor"
+  scope                            = data.azurerm_resource_group.vnet_rg.id
+  skip_service_principal_aad_check = true
+}
+
+resource "azurerm_role_assignment" "reader_role_assignment" {
+  for_each = local.clusters
+
+  principal_id                     = data.azurerm_data_protection_backup_vault.backup_vault.identity[0].principal_id
+  role_definition_name             = "Reader"
+  scope                            = azurerm_kubernetes_cluster.cluster[each.key].id
+  skip_service_principal_aad_check = true
+}
