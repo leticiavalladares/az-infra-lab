@@ -95,7 +95,7 @@ resource "azurerm_data_protection_backup_policy_kubernetes_cluster" "backup_poli
 }
 
 resource "random_id" "suffix_st" {
-  byte_length = 8
+  byte_length = 4
 }
 
 resource "azurerm_storage_account" "backup_storage_account" {
