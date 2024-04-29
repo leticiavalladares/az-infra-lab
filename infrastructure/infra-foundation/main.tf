@@ -94,8 +94,12 @@ resource "azurerm_data_protection_backup_policy_kubernetes_cluster" "backup_poli
   }
 }
 
+resource "random_id" "suffix_st" {
+  byte_length = 8
+}
+
 resource "azurerm_storage_account" "backup_storage_account" {
-  name                     = "${replace(local.name_suffix, "-", "")}st"
+  name                     = "${replace(local.name_suffix, "-", "")}${lower(random_id.suffix_st.hex)}st"
   resource_group_name      = azurerm_resource_group.vnet_rg.name
   location                 = azurerm_resource_group.vnet_rg.location
   account_tier             = "Standard"
