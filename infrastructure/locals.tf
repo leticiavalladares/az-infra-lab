@@ -19,11 +19,10 @@ locals {
       address_prefixes = [cidrsubnet(data.azurerm_virtual_network.vnet.address_space[0], 4, (var.trainee_number - 1))]
     }
     2 = {
-      address_prefixes = [cidrsubnet(data.azurerm_virtual_network.vnet.address_space[0], 8, (var.trainee_number + 159))]
+      address_prefixes = [cidrsubnet(data.azurerm_virtual_network.vnet.address_space[0], 10, (var.trainee_number + 959))]
     }
     3 = {
-      address_prefixes = [cidrsubnet(data.azurerm_virtual_network.vnet.address_space[0], 10, (var.trainee_number + 679))]
+      address_prefixes = [cidrsubnet(data.azurerm_virtual_network.vnet.address_space[0], 10, (var.trainee_number + 973))]
     }
   }
-
 }
